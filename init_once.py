@@ -1,6 +1,14 @@
-def init_once(initializer, *init_args, **init_kwds):
-    def decorator(func):
-        def first_call(*args, **kwds):
+from functools import wraps
+from typing import Callable
+
+
+def init_once[**InitParams, InitRet](
+    initializer: Callable[InitParams, InitRet], 
+    *init_args: InitParams.args, 
+    **init_kwds: InitParams.kwargs
+):
+    def decorator[**P, R](func: Callable[P, R]):
+        def first_call(*args: P.args, **kwds: P.kwargs):
             nonlocal curr_func
             initializer(*init_args, **init_kwds)
             curr_func = func
@@ -8,7 +16,8 @@ def init_once(initializer, *init_args, **init_kwds):
 
         curr_func = first_call
 
-        def wrapper(*args, **kwds):
+        @wraps(func)
+        def wrapper(*args: P.args, **kwds: P.kwargs):
             return curr_func(*args, **kwds)
         
         return wrapper
