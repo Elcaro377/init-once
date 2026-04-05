@@ -43,3 +43,6 @@ Issues = "https://github.com/Elcaro377/init-once/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+init_once = ["py.typed"]
