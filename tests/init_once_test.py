@@ -11,8 +11,9 @@ def func(s: str):
     """func doc"""
     return s
 
-assert func.__doc__ == """func doc"""   # test functools.wraps
-assert func('x') == 'x'
-assert init_count == 1
-assert func('x') == 'x'
-assert init_count == 1
+def test_init_once():
+    assert func.__doc__ == """func doc"""   # test functools.wraps
+    assert func('x') == 'x'
+    assert init_count == 1
+    assert func('x') == 'x'
+    assert init_count == 1
