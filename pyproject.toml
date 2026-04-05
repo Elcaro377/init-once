@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Utility for initialization that runs an extra function once before a function is called"
 readme = "README.md"
 requires-python = ">=3.8"
-license = "MIT"
+license = { text = "MIT" }
 authors = [
     {name = "Elcaro377", email = "Elcaro377@outlook.com"},
 ]
