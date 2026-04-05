@@ -22,3 +22,5 @@ def init_once[**InitParams, InitRet](
         
         return wrapper
     return decorator
+
+__all__ = ['init_once']

@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "init-once"
+version = "0.1.0"
+description = "Utility for initialization that runs an extra function once before a function is called"
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+authors = [
+    {name = "Elcaro377", email = "Elcaro377@outlook.com"},
+]
+keywords = ["decorator", "lazy-initialization", "once", "function"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "build>=1.0",
+    "twine>=4.0",
+    "flake8>=6.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Elcaro377/init-once"
+Repository = "https://github.com/Elcaro377/init-once.git"
+Issues = "https://github.com/Elcaro377/init-once/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
