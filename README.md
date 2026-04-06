@@ -1,4 +1,4 @@
-[中文](README.zh-CN.md) | English
+English | [简体中文](README.zh-CN.md)
 
 # init_once
 
