@@ -1,1 +1,62 @@
-# init-once
+[中文](README.zh-CN.md) | English
+
+# init_once
+
+## Introduction
+
+`init_once` is a decorator that ensures an initialization function is executed **only once before the first call of the decorated function**. The initialization logic will not be repeated on subsequent calls to the decorated function.
+
+## Dependencies and Version Requirements
+
+- Python 3.8 or higher
+
+## Usage
+
+### Basic Syntax
+
+```python
+@init_once(initializer, *init_args, **init_kwds)
+def func(...):
+    ...
+```
+
+- `initializer`: The initialization function that needs to be executed once.
+- `*init_args`: Positional arguments to pass to `initializer`.
+- `**init_kwds`: Keyword arguments to pass to `initializer`.
+
+### Simple Example
+
+```python
+from init_once import init_once
+
+# Initialization function: runs only once
+def init_func(msg: str):
+    print(f"Initializing msg: {msg}")
+
+@init_once(init_func, "hello")
+def main_task(data: str):
+    print(f"Processing: {data}")
+
+# First call: init_func executes first, then main_task
+main_task("first")
+# Output:
+# Initializing msg: hello
+# Processing: first
+
+# Subsequent calls: only main_task executes
+main_task("second")
+# Output:
+# Processing: second
+```
+
+## Notes
+1. **Applicability**: This decorator is only suitable for simple initialization procedures. Its return value is ignored. If you need to obtain the return value, it indicates that this decorator should not be used for implicit initialization.
+2. **Async and Threading**: Async and thread-safe versions are to be implemented in the future.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+If you have any questions or suggestions for improvement, feel free to open an Issue or submit a Pull Request.
