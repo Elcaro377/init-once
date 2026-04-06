@@ -50,7 +50,7 @@ main_task("second")
 ```
 
 ## Notes
-1. **Applicability**: This decorator is only suitable for simple initialization procedures. Its return value is ignored. If you need to obtain the return value, it indicates that this decorator should not be used for implicit initialization.
+1. **Applicability**: This decorator is only for simple initialization (return ignored). If you need the return value, you should handle the initialization explicitly instead of using this decorator.
 2. **Async and Threading**: Async and thread-safe versions are to be implemented in the future.
 
 ## License
