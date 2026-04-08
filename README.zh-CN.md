@@ -4,7 +4,7 @@
 
 ## 简介
 
-`init_once` 是一个装饰器，用于确保初始化函数**仅在被装饰函数第一次调用前执行一次**。后续调用被装饰函数时，初始化逻辑不会重复执行。
+`init_once` 是一个装饰器，用于**在被装饰函数第一次被调用时运行前执行一次初始化函数**，初始化仅执行一次，**无需手动维护外层标志位**。
 
 
 ## 依赖与版本要求
@@ -48,6 +48,23 @@ main_task("first")
 main_task("second")
 # 输出：
 # Processing: second
+
+# 以上代码等效于：
+initialized = False
+
+def init_func(msg: str):
+    print(f"Initializing msg: {msg}")
+
+def main_task(data: str):
+    global initialized
+    if not initialized:
+        init_func("hello")
+        initialized = True
+
+    print(f"Processing: {data}")
+
+main_task("first")
+main_task("second")
 ```
 
 ## 注意事项

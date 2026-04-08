@@ -4,7 +4,7 @@ English | [简体中文](README.zh-CN.md)
 
 ## Introduction
 
-`init_once` is a decorator that ensures an initialization function is executed **only once before the first call of the decorated function**. The initialization logic will not be repeated on subsequent calls to the decorated function.
+`init_once` is a decorator that **runs an initialization function once right before the decorated function is called for the first time**. The initialization runs only once. **No outer flag needed**.
 
 ## Dependencies and Version Requirements
 
@@ -47,6 +47,23 @@ main_task("first")
 main_task("second")
 # Output:
 # Processing: second
+
+# The above is equivalent to:
+initialized = False
+
+def init_func(msg: str):
+    print(f"Initializing msg: {msg}")
+
+def main_task(data: str):
+    global initialized
+    if not initialized:
+        init_func("hello")
+        initialized = True
+
+    print(f"Processing: {data}")
+
+main_task("first")
+main_task("second")
 ```
 
 ## Notes
