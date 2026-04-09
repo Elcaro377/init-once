@@ -1,3 +1,4 @@
+import threading
 from collections.abc import Callable
 from functools import wraps
 
@@ -44,10 +45,16 @@ def init_once[**InitParams, InitRet](
     """
 
     def decorator[**P, R](func: Callable[P, R]):
-        def first_call(*args: P.args, **kwds: P.kwargs):
+        lock = threading.Lock()
+
+        def initialization():
             nonlocal curr_func
+            if curr_func is func: return
             initializer(*init_args, **init_kwds)
             curr_func = func
+
+        def first_call(*args: P.args, **kwds: P.kwargs):
+            with lock: initialization()
             return func(*args, **kwds)
 
         curr_func = first_call
