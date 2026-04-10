@@ -4,7 +4,7 @@ English | [简体中文](README.zh-CN.md)
 
 ## Introduction
 
-`init_once` is a decorator that **runs an initialization function once right before the decorated function is called for the first time**. The initialization runs only once. **No outer flag needed**.
+`init_once` is a thread-safe decorator that **runs an initialization function once right before the decorated function is called for the first time**. The initialization runs only once. **No outer flag needed**.
 
 ## Dependencies and Version Requirements
 
@@ -67,8 +67,8 @@ main_task("second")
 ```
 
 ## Notes
-1. **Applicability**: This decorator is only for simple initialization (return ignored). If you need the return value, you should handle the initialization explicitly instead of using this decorator.
-2. **Async and Threading**: Async and thread-safe versions are to be implemented in the future.
+1. This decorator is only for simple initialization (return ignored). If you need the return value, you should handle the initialization explicitly instead of using this decorator.
+2. Async version is to be implemented in the future.
 
 ## License
 

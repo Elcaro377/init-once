@@ -1,4 +1,5 @@
 import sys
+import threading
 from functools import wraps
 from typing import Callable, TypeVar
 
@@ -48,17 +49,23 @@ def init_once(
         This decorator is only for simple initialization (return ignored).
 
     .. warning::
-        Async and thread-safe are not supported yet
+        Async is not supported yet
         
     """
     P = ParamSpec('P')
     R = TypeVar('R')
 
     def decorator(func: Callable[P, R]):
-        def first_call(*args: P.args, **kwds: P.kwargs):
+        lock = threading.Lock()
+
+        def initialization():
             nonlocal curr_func
+            if curr_func is func: return
             initializer(*init_args, **init_kwds)
             curr_func = func
+
+        def first_call(*args: P.args, **kwds: P.kwargs):
+            with lock: initialization()
             return func(*args, **kwds)
 
         curr_func = first_call
