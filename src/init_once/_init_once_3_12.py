@@ -40,7 +40,7 @@ def init_once[**InitParams, InitRet](
         This decorator is only for simple initialization (return ignored).
 
     .. warning::
-        Async and thread-safe are not supported yet
+        Async is not supported yet
         
     """
 
